@@ -71,96 +71,99 @@ class TweetCell: UITableViewCell {
         return "\(timeAgo)\(timeChar)"
     }
     
-   /* @IBAction func retweetButtonClicked(sender: AnyObject) {
+   @IBAction func retweetButtonClicked(sender: AnyObject) {
         
-        print("Retweet button clicked")
-        
-        TwitterClient.sharedInstance.retweetWithCompletion(["id": self.tweetID!]) { (tweet, error) -> ()  in
-            
-            if (self.tweet != nil) {
-            
-                //self.retweetButton.setImage(UIImage(named: "retweet-action-on-green.png"), forState: UIControlState.Normal)
-                
-                if self.retweetLabel.text! > "0" {
-                    self.retweetLabel.text = String(self.tweet!.retweet_count + 1)
-                } else {
-                    self.retweetLabel.hidden = false
-                    self.retweetLabel.text =
-                        String(self.tweet!.retweet_count + 1)
-                }
-                
-            }
-            else {
-                print("ERROR retweeting: \(error)")
-            }
-        }
+//        print("Retweet button clicked")
+//        
+//        TwitterClient.sharedInstance.retweetWithCompletion(["id": self.tweetID!]) { (tweet, error) -> ()  in
+//            
+//            if (self.tweet != nil) {
+//            
+//                //self.retweetButton.setImage(UIImage(named: "retweet-action-on-green.png"), forState: UIControlState.Normal)
+//                
+//                if self.retweetLabel.text! > "0" {
+//                    self.retweetLabel.text = String(self.tweet!.retweet_count + 1)
+//                } else {
+//                    self.retweetLabel.hidden = false
+//                    self.retweetLabel.text =
+//                        String(self.tweet!.retweet_count + 1)
+//                }
+//                
+//            }
+//            else {
+//                print("ERROR retweeting: \(error)")
+//            }
+//        }
     }
     
     @IBAction func likeButtonClicked(sender: AnyObject) {
-        
-        print("Like button clicked")
-        
-        TwitterClient.sharedInstance.favoriteWithCompletion(["id": tweetID!]) { (tweet, error) -> () in
-            
-            if (self.tweet != nil) {
-                
-                //self.favButton.setImage(UIImage(named: "like-action-on-red.png"), forState: UIControlState.Normal)
-                
-                if self.favoritesLabel.text! > "0" {
-                    self.favoritesLabel.text = String(self.tweet!.favorites_count + 1)
-                } else {
-                    self.favoritesLabel.hidden = false
-                    self.favoritesLabel.text = String(self.tweet!.favorites_count + 1)
-                }
-                
-            }
-            else {
-                print("Did it print the print fav tweet? cause this is the error message and you should not be seeing this.")
-            }
-        }
-    } */
+//        
+//        print("Like button clicked")
+//        
+//        TwitterClient.sharedInstance.favoriteWithCompletion(["id": tweetID!]) { (tweet, error) -> () in
+//            
+//            if (self.tweet != nil) {
+//                
+//                //self.favButton.setImage(UIImage(named: "like-action-on-red.png"), forState: UIControlState.Normal)
+//                
+//                if self.favoritesLabel.text! > "0" {
+//                    self.favoritesLabel.text = String(self.tweet!.favorites_count + 1)
+//                } else {
+//                    self.favoritesLabel.hidden = false
+//                    self.favoritesLabel.text = String(self.tweet!.favorites_count + 1)
+//                }
+//                
+//            }
+//            else {
+//                print("Did it print the print fav tweet? cause this is the error message and you should not be seeing this.")
+//            }
+//        }
+    }
+
     
+    
+    //Fixed line 126 - Adrian
     @IBAction func onRetweetButtonPressed(sender: AnyObject) {
-        TwitterClient.sharedInstance.retweetWithCompletion(self.tweet.id!) { (tweet, error) -> () in
+        TwitterClient.sharedInstance.retweetWithCompletion(["id": tweet!.id!]) { (tweet, error) -> () in
             if (tweet != nil) {
                 let alert: UIAlertController = UIAlertController(title: "Retweeted!", message: nil, preferredStyle: .Alert)
                 let defaultAction = UIAlertAction(title: "OK", style: .Default, handler: nil)
                 
                 alert.addAction(defaultAction);
-                self.presentViewController(alert, animated: true, completion: nil)
+               // self.presentViewController(alert, animated: true, completion: nil)
             } else if (error != nil) {
                 let alert: UIAlertController = UIAlertController(title: "There was an error retweeting", message: error!.userInfo["error"] as? String, preferredStyle: .Alert)
                 let defaultAction = UIAlertAction(title: "OK", style: .Default, handler: nil)
                 
                 alert.addAction(defaultAction);
-                self.presentViewController(alert, animated: true, completion: nil)
+                //self.presentViewController(alert, animated: true, completion: nil)
             }
         }
     }
     
     @IBAction func onFavoriteButtonPressed(sender: AnyObject) {
-        self.tweet.favorited = !self.favoriteButton.selected
-        self.favoriteButton.selected = !self.favoriteButton.selected
-        if (self.favoriteButton.selected) {
-            self.tweet.favoriteCount!++
-        } else {
-            self.tweet.favoriteCount!--
-        }
-        self.tweetFavoritesCountLabel.text = "\(self.tweet.favoriteCount!)"
-        let params = NSDictionary(object: self.tweet.id!, forKey: "id")
-        TwitterClient.sharedInstance.favoriteWithCompletion(self.favoriteButton.selected, params: params) { (error) -> () in
-            if (error == nil) {
-                let alert: UIAlertController = UIAlertController(title: "Favorited!", message: nil, preferredStyle: .Alert)
-                let defaultAction = UIAlertAction(title: "OK", style: .Default, handler: nil)
-                alert.addAction(defaultAction);
-                self.presentViewController(alert, animated: true, completion: nil)
-            } else if (error != nil) {
-                let alert: UIAlertController = UIAlertController(title: "There was an error favoriting", message: error!.userInfo["error"] as? String, preferredStyle: .Alert)
-                let defaultAction = UIAlertAction(title: "OK", style: .Default, handler: nil)
-                alert.addAction(defaultAction);
-                self.presentViewController(alert, animated: true, completion: nil)
-            }
-        }
+//        self.tweet.favorited = !self.favoriteButton.selected
+//        self.favoriteButton.selected = !self.favoriteButton.selected
+//        if (self.favoriteButton.selected) {
+//            self.tweet.favoriteCount!++
+//        } else {
+//            self.tweet.favoriteCount!--
+//        }
+//        self.tweetFavoritesCountLabel.text = "\(self.tweet.favoriteCount!)"
+//        let params = NSDictionary(object: self.tweet.id!, forKey: "id")
+//        TwitterClient.sharedInstance.favoriteWithCompletion(self.favoriteButton.selected, params: params) { (error) -> () in
+//            if (error == nil) {
+//                let alert: UIAlertController = UIAlertController(title: "Favorited!", message: nil, preferredStyle: .Alert)
+//                let defaultAction = UIAlertAction(title: "OK", style: .Default, handler: nil)
+//                alert.addAction(defaultAction);
+//                self.presentViewController(alert, animated: true, completion: nil)
+//            } else if (error != nil) {
+//                let alert: UIAlertController = UIAlertController(title: "There was an error favoriting", message: error!.userInfo["error"] as? String, preferredStyle: .Alert)
+//                let defaultAction = UIAlertAction(title: "OK", style: .Default, handler: nil)
+//                alert.addAction(defaultAction);
+//                self.presentViewController(alert, animated: true, completion: nil)
+//            }
+//        }
     }
 
 
