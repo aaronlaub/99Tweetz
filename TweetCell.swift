@@ -71,7 +71,7 @@ class TweetCell: UITableViewCell {
         return "\(timeAgo)\(timeChar)"
     }
     
-    @IBAction func retweetButtonClicked(sender: AnyObject) {
+   /* @IBAction func retweetButtonClicked(sender: AnyObject) {
         
         print("Retweet button clicked")
         
@@ -118,7 +118,51 @@ class TweetCell: UITableViewCell {
                 print("Did it print the print fav tweet? cause this is the error message and you should not be seeing this.")
             }
         }
+    } */
+    
+    @IBAction func onRetweetButtonPressed(sender: AnyObject) {
+        TwitterClient.sharedInstance.retweetWithCompletion(self.tweet.id!) { (tweet, error) -> () in
+            if (tweet != nil) {
+                let alert: UIAlertController = UIAlertController(title: "Retweeted!", message: nil, preferredStyle: .Alert)
+                let defaultAction = UIAlertAction(title: "OK", style: .Default, handler: nil)
+                
+                alert.addAction(defaultAction);
+                self.presentViewController(alert, animated: true, completion: nil)
+            } else if (error != nil) {
+                let alert: UIAlertController = UIAlertController(title: "There was an error retweeting", message: error!.userInfo["error"] as? String, preferredStyle: .Alert)
+                let defaultAction = UIAlertAction(title: "OK", style: .Default, handler: nil)
+                
+                alert.addAction(defaultAction);
+                self.presentViewController(alert, animated: true, completion: nil)
+            }
+        }
     }
+    
+    @IBAction func onFavoriteButtonPressed(sender: AnyObject) {
+        self.tweet.favorited = !self.favoriteButton.selected
+        self.favoriteButton.selected = !self.favoriteButton.selected
+        if (self.favoriteButton.selected) {
+            self.tweet.favoriteCount!++
+        } else {
+            self.tweet.favoriteCount!--
+        }
+        self.tweetFavoritesCountLabel.text = "\(self.tweet.favoriteCount!)"
+        let params = NSDictionary(object: self.tweet.id!, forKey: "id")
+        TwitterClient.sharedInstance.favoriteWithCompletion(self.favoriteButton.selected, params: params) { (error) -> () in
+            if (error == nil) {
+                let alert: UIAlertController = UIAlertController(title: "Favorited!", message: nil, preferredStyle: .Alert)
+                let defaultAction = UIAlertAction(title: "OK", style: .Default, handler: nil)
+                alert.addAction(defaultAction);
+                self.presentViewController(alert, animated: true, completion: nil)
+            } else if (error != nil) {
+                let alert: UIAlertController = UIAlertController(title: "There was an error favoriting", message: error!.userInfo["error"] as? String, preferredStyle: .Alert)
+                let defaultAction = UIAlertAction(title: "OK", style: .Default, handler: nil)
+                alert.addAction(defaultAction);
+                self.presentViewController(alert, animated: true, completion: nil)
+            }
+        }
+    }
+
 
     override func awakeFromNib() {
         super.awakeFromNib()

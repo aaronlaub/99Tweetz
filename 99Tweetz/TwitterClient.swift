@@ -155,7 +155,7 @@ class TwitterClient: BDBOAuth1SessionManager {
         
     }
        
-        /*POST("1.1/statuses/retweet/\(params!["id"] as? Int).json", parameters: params, success: { (operation: NSURLSessionDataTask, response: AnyObject?) -> Void in
+       /* POST("1.1/statuses/retweet/\(params!["id"] as? Int).json", parameters: params, success: { (operation: NSURLSessionDataTask, response: AnyObject?) -> Void in
             
             let tweet = Tweet.tweetAsDictionary((response as! NSDictionary))
             
@@ -172,7 +172,32 @@ class TwitterClient: BDBOAuth1SessionManager {
         }
     } */
 
+
     
+    /*func retweetWithCompletion(params: NSDictionary?, completion: (tweet: Tweet?, error: NSError?) -> ()) {
+        POST("1.1/statuses/retweet/\(params!["id"] as! Int).json", parameters: params!, success: { (operation: NSURLSessionDataTask!, response: AnyObject!) -> Void in
+            print("Successfully retweeted")
+            print(response)
+            let tweet = Tweet.tweetAsDictionary(response as! NSDictionary)
+            // let tweet = Tweet(dictionary: response as! NSDictionary)
+            completion(tweet: tweet, error: nil)
+            }) { (operation: NSURLSessionDataTask!, error: NSError!) -> Void in
+                print("error: \(error)");
+                completion(tweet: nil, error: error)
+        }
+    }
+    
+    func favoriteWithCompletion(state: Bool, params: NSDictionary?, completion: (error: NSError?) -> ()) {
+        let endpoint = (state) ? "1.1/favorites/create.json" : "1.1/favorites/destroy.json"
+        POST(endpoint, parameters: AnyObject?, success: { (operation: NSURLSessionDataTask!, response: AnyObject!) -> Void in
+            print(response)
+            completion(error: nil)
+            }) { (operation: NSURLSessionDataTask!, error: NSError!) -> Void in
+                completion(error: error)
+        }
+    } */
+    
+
     func currentAccount(success: (User) -> (), failure: (NSError) -> ()) {
         GET("1.1/account/verify_credentials.json", parameters: nil, progress: nil, success: { (task: NSURLSessionDataTask, response: AnyObject?) -> Void in
             let userDictionary = response as! NSDictionary
