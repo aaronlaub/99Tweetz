@@ -75,10 +75,10 @@ class TweetCell: UITableViewCell {
         
         print("Retweet button clicked")
         
-        TwitterClient.sharedInstance.retweetWithCompletion(["id": tweetID!]) { (tweet, error) -> ()  in
+        TwitterClient.sharedInstance.retweetWithCompletion(["id": self.tweetID!]) { (tweet, error) -> ()  in
             
             if (self.tweet != nil) {
-                
+            
                 //self.retweetButton.setImage(UIImage(named: "retweet-action-on-green.png"), forState: UIControlState.Normal)
                 
                 if self.retweetLabel.text! > "0" {
