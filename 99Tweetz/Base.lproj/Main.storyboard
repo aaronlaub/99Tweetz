@@ -99,7 +99,7 @@
                                                     <fontDescription key="fontDescription" name="Chalkduster" family="Chalkduster" pointSize="9"/>
                                                     <state key="normal" title="retweet"/>
                                                     <connections>
-                                                        <action selector="retweetButtonClicked:" destination="7ED-GD-LLJ" eventType="touchUpInside" id="zCW-Xe-fo8"/>
+                                                        <action selector="onRetweetButtonPressed:" destination="7ED-GD-LLJ" eventType="touchUpInside" id="CBF-Oz-oJE"/>
                                                     </connections>
                                                 </button>
                                                 <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="cXh-pI-qOY">
@@ -123,7 +123,6 @@
                                             <outlet property="favButton" destination="cXh-pI-qOY" id="Y1D-2B-vkM"/>
                                             <outlet property="favoritesLabel" destination="cFz-kn-dMB" id="9fR-Nk-3Hs"/>
                                             <outlet property="profileImageView" destination="Ooa-zs-Bqr" id="lRU-bp-fGn"/>
-                                            <outlet property="retweetButton" destination="04W-Fb-4ZD" id="o1J-rg-djy"/>
                                             <outlet property="retweetLabel" destination="LNY-g0-G4M" id="4wd-Ks-BTO"/>
                                             <outlet property="timeLabel" destination="Nmk-aT-a69" id="XyN-Dp-wmT"/>
                                             <outlet property="tweetLabel" destination="w6h-Q8-uYG" id="gpL-2Y-OO1"/>

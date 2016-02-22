@@ -71,7 +71,7 @@ class TweetCell: UITableViewCell {
         return "\(timeAgo)\(timeChar)"
     }
     
-   @IBAction func retweetButtonClicked(sender: AnyObject) {
+  /* @IBAction func retweetButtonClicked(sender: AnyObject) {
         
 //        print("Retweet button clicked")
 //        
@@ -96,8 +96,14 @@ class TweetCell: UITableViewCell {
 //        }
     }
     
-    @IBAction func likeButtonClicked(sender: AnyObject) {
-//        
+//let url = NSURL(string: "https://api.twitter.com/oauth/authorize?oauth_token=\(requestToken.token)")!
+UIApplication.sharedApplication().openURL(url)
+
+}) { (error: NSError!) -> Void in
+    print("error: \(error.localizedDescription)")
+    self.loginFailure?(error)
+@IBAction func likeButtonClicked(sender: AnyObject) {
+//
 //        print("Like button clicked")
 //        
 //        TwitterClient.sharedInstance.favoriteWithCompletion(["id": tweetID!]) { (tweet, error) -> () in
@@ -119,7 +125,7 @@ class TweetCell: UITableViewCell {
 //            }
 //        }
     }
-
+*/
     
     
     //Fixed line 126 - Adrian
