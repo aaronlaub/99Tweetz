@@ -33,7 +33,7 @@ Please list two areas of the assignment you'd like to **discuss further with you
 
 Here's a walkthrough of implemented user stories:
 
-![walkthrough](http://i.imgur.com/Ch3yUTZ.gifv)
+![walkthrough](file:///Users/Laub/Aaron/2016/Xcode%20Projects/Pics:Gifs/99Tweetz.gif)
 
 GIF created with [LiceCap](http://www.cockos.com/licecap/).
 
